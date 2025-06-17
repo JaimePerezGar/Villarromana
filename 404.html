@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada - Hotel Rural Villarromana</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            color: #2c5530;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 32px;
+            color: #2c5530;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+        p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #2c5530;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #1e3a21;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 85, 48, 0.3);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #2c5530;
+            border: 2px solid #2c5530;
+        }
+        .btn-secondary:hover {
+            background-color: #2c5530;
+            color: white;
+        }
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 80px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            p {
+                font-size: 16px;
+            }
+            .error-container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <img src="/img/logo-villarromana.svg" alt="Hotel Rural Villarromana" class="logo">
+        <div class="error-code">404</div>
+        <h1>Página no encontrada</h1>
+        <p>Lo sentimos, la página que buscas no existe o ha sido movida. Pero no te preocupes, hay muchas otras cosas interesantes que descubrir en nuestro hotel rural.</p>
+        <div class="buttons">
+            <a href="/" class="btn btn-primary">Ir al inicio</a>
+            <a href="/pages/contacto.html" class="btn btn-secondary">Contactar</a>
+        </div>
+    </div>
+</body>
+</html>

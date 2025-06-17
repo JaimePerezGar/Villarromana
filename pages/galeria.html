@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Hotel Rural Villarromana</title>
+    <meta name="description" content="Galería de fotos del Hotel Rural Villarromana. Imágenes de nuestras instalaciones, habitaciones, entorno natural y experiencias únicas.">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="../index.html" class="logo">
+                        <img src="../img/logo-villarromana.svg" alt="Villarromana Hotel Rural">
+                        <div>
+                            <h1>Villarromana</h1>
+                            <span>Hotel Rural</span>
+                        </div>
+                    </a>
+                    <button class="nav-toggle" aria-label="Abrir menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="instalaciones.html">Instalaciones</a></li>
+                        <li><a href="ubicacion.html">Ubicación</a></li>
+                        <li><a href="entorno.html">Entorno</a></li>
+                        <li><a href="galeria.html" class="active">Galería</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                    <div class="language-selector">
+                        <button class="lang-button" id="langToggle">
+                            <span>Español</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="galeria.html" class="lang-option active">
+                                <span>Español</span>
+                            </a>
+                            <a href="../en/pages/gallery.html" class="lang-option">
+                                <span>English</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li class="separator">›</li>
+                    <li aria-current="page">Galería</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <main>
+        <section class="page-hero" style="background-image: linear-gradient(rgba(44, 85, 48, 0.8), rgba(44, 85, 48, 0.8)), url('../img/fachada1.jpg');">
+            <div class="page-hero-content">
+                <h1>Galería</h1>
+                <p>Descubre la belleza de nuestras instalaciones</p>
+            </div>
+        </section>
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="habitaciones">Habitaciones</button>
+                    <button class="filter-btn" data-filter="instalaciones">Instalaciones</button>
+                    <button class="filter-btn" data-filter="entorno">Entorno</button>
+                    <button class="filter-btn" data-filter="gastronomia">Gastronomía</button>
+                </div>
+                <div class="gallery-grid">
+                    <!-- Habitaciones -->
+                    <div class="gallery-item" data-category="habitaciones">
+                        <img src="../img/habitación.jpg" alt="Habitación Doble con vistas">
+                        <div class="gallery-overlay">
+                            <h3>Habitación Doble</h3>
+                            <p>Confort y elegancia con vistas al jardín</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="habitaciones">
+                        <img src="../img/habitación2.jpg" alt="Habitación Familiar">
+                        <div class="gallery-overlay">
+                            <h3>Habitación Familiar</h3>
+                            <p>Espacio ideal para toda la familia</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="habitaciones">
+                        <img src="../img/habitación3.jpg" alt="Suite con terraza">
+                        <div class="gallery-overlay">
+                            <h3>Suite Premium</h3>
+                            <p>Lujo y comodidad con terraza privada</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="habitaciones">
+                        <img src="../img/habitación4.jpg" alt="Habitación con vistas">
+                        <div class="gallery-overlay">
+                            <h3>Habitación con Vistas</h3>
+                            <p>Despertar con vistas a la naturaleza</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="habitaciones">
+                        <img src="../img/habitación5.jpg" alt="Habitación Deluxe">
+                        <div class="gallery-overlay">
+                            <h3>Habitación Deluxe</h3>
+                            <p>Confort superior para tu descanso</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="habitaciones">
+                        <img src="../img/habitación6.jpg" alt="Habitación Estándar">
+                        <div class="gallery-overlay">
+                            <h3>Habitación Estándar</h3>
+                            <p>Todo lo necesario para tu estancia</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="habitaciones">
+                        <img src="../img/habitación7.jpg" alt="Habitación Individual">
+                        <div class="gallery-overlay">
+                            <h3>Habitación Individual</h3>
+                            <p>Perfecta para viajeros solitarios</p>
+                        </div>
+                    </div>
+                    <!-- Instalaciones - Salones -->
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/salon arriba.jpg" alt="Salón Principal">
+                        <div class="gallery-overlay">
+                            <h3>Salón Principal</h3>
+                            <p>Un espacio acogedor para relajarse</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/salon arriba2.jpg" alt="Salón con Chimenea">
+                        <div class="gallery-overlay">
+                            <h3>Salón con Chimenea</h3>
+                            <p>Calidez y confort en los días fríos</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/salon arriba3.jpg" alt="Sala de Estar">
+                        <div class="gallery-overlay">
+                            <h3>Sala de Estar</h3>
+                            <p>Espacio común para compartir momentos</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/salon arriba4.jpg" alt="Rincón de Lectura">
+                        <div class="gallery-overlay">
+                            <h3>Rincón de Lectura</h3>
+                            <p>Un lugar tranquilo para desconectar</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/salon-exterior.jpg" alt="Salón Exterior">
+                        <div class="gallery-overlay">
+                            <h3>Salón Exterior</h3>
+                            <p>Disfruta del aire libre con comodidad</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/salón exterior2.jpg" alt="Terraza Panorámica">
+                        <div class="gallery-overlay">
+                            <h3>Terraza Panorámica</h3>
+                            <p>Vistas espectaculares del valle</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/salón exxterior3.jpg" alt="Zona Chill Out">
+                        <div class="gallery-overlay">
+                            <h3>Zona Chill Out</h3>
+                            <p>Relájate al aire libre</p>
+                        </div>
+                    </div>
+                    <!-- Instalaciones - Otros -->
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/chimenea.jpg" alt="Chimenea">
+                        <div class="gallery-overlay">
+                            <h3>Chimenea</h3>
+                            <p>Calor de hogar en invierno</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/escalera.jpg" alt="Escalera Principal">
+                        <div class="gallery-overlay">
+                            <h3>Escalera Principal</h3>
+                            <p>Arquitectura tradicional castellana</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="instalaciones">
+                        <img src="../img/piscina.jpg" alt="Piscina">
+                        <div class="gallery-overlay">
+                            <h3>Piscina</h3>
+                            <p>Refréscate en verano</p>
+                        </div>
+                    </div>
+                    <!-- Entorno -->
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/fachada_estanque.jpg" alt="Fachada con Estanque">
+                        <div class="gallery-overlay">
+                            <h3>Vista Principal</h3>
+                            <p>La belleza del hotel y su entorno</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/fuente.jpg" alt="Fuente del Jardín">
+                        <div class="gallery-overlay">
+                            <h3>Fuente del Jardín</h3>
+                            <p>El sonido relajante del agua</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/fuente fachada.jpg" alt="Fuente de la Fachada">
+                        <div class="gallery-overlay">
+                            <h3>Fuente de la Fachada</h3>
+                            <p>Detalle arquitectónico único</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/estanque.jpg" alt="Estanque Natural">
+                        <div class="gallery-overlay">
+                            <h3>Estanque Natural</h3>
+                            <p>Un oasis de tranquilidad</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/estanque2.jpg" alt="Vista del Estanque">
+                        <div class="gallery-overlay">
+                            <h3>Vista del Estanque</h3>
+                            <p>Naturaleza en estado puro</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/estanque3.jpg" alt="Atardecer en el Estanque">
+                        <div class="gallery-overlay">
+                            <h3>Atardecer en el Estanque</h3>
+                            <p>Momentos mágicos al caer el sol</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/camino.jpg" alt="Senderos del Hotel">
+                        <div class="gallery-overlay">
+                            <h3>Senderos del Hotel</h3>
+                            <p>Paseos entre la naturaleza</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/camino piscina.jpg" alt="Camino a la Piscina">
+                        <div class="gallery-overlay">
+                            <h3>Camino a la Piscina</h3>
+                            <p>Acceso rodeado de vegetación</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="entorno">
+                        <img src="../img/parque niños.jpg" alt="Zona Infantil">
+                        <div class="gallery-overlay">
+                            <h3>Zona Infantil</h3>
+                            <p>Diversión para los más pequeños</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Lightbox para visualización de imágenes -->
+        <div class="lightbox" id="lightbox">
+            <span class="close-lightbox">&times;</span>
+            <img src="" alt="" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+            <button class="lightbox-prev">&#10094;</button>
+            <button class="lightbox-next">&#10095;</button>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../img/logo-villarromana-white.svg" alt="Villarromana Hotel Rural">
+                    </div>
+                    <h3>Hotel Rural Villarromana</h3>
+                    <p>Tu refugio de tranquilidad en Saldaña, donde la naturaleza y el confort se encuentran.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces rápidos</h4>
+                    <ul>
+                        <li><a href="instalaciones.html">Instalaciones</a></li>
+                        <li><a href="ubicacion.html">Cómo llegar</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Saldaña, Palencia<br>
+                    Tel: +34 979 892 026<br>
+                    Móvil: +34 615 389 480<br>
+                    info@villarromana.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hotel Rural Villarromana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/34615389480?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20el%20Hotel%20Rural%20Villarromana" class="whatsapp-float" target="_blank" aria-label="Chatea por WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="white"/>
+        </svg>
+    </a>
+    <script src="../js/main.js"></script>

@@ -1,0 +1,45 @@
+# Git
+.git
+.gitignore
+
+# Documentación
+README.md
+docs/
+*.md
+
+# Archivos de desarrollo
+.DS_Store
+*.log
+*.tmp
+*.temp
+.env
+.env.local
+
+# PHP (ya no necesario)
+php/
+*.php
+
+# Node modules (si los hubiera)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Scripts de desarrollo
+scripts/
+test-comments.html
+tests/
+
+# Archivos de backup
+*.bak
+*.backup
+*~
+
+# Archivos temporales del sistema
+Thumbs.db
+desktop.ini

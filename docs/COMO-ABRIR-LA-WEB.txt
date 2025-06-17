@@ -1,0 +1,54 @@
+================================================
+🏚️  CÓMO ABRIR LA WEB DE VILLARROMANA
+================================================
+
+MÉTODO 1: MÁS FÁCIL (RECOMENDADO)
+---------------------------------
+1. Abre Finder
+2. Ve a la carpeta: /Users/skllz/Documents/Claude/Villaromana/villarromana-web
+3. Haz doble clic en: iniciar-web.command
+4. Se abrirá una Terminal y el navegador automáticamente
+
+MÉTODO 2: DESDE TERMINAL
+------------------------
+1. Abre Terminal (Aplicaciones > Utilidades > Terminal)
+2. Copia y pega estos comandos uno por uno:
+
+   cd /Users/skllz/Documents/Claude/Villaromana/villarromana-web
+   ./INICIAR-SERVIDOR.sh
+
+3. Se abrirá el navegador automáticamente
+
+MÉTODO 3: MANUAL
+----------------
+1. Abre Terminal
+2. Ejecuta estos comandos:
+
+   cd /Users/skllz/Documents/Claude/Villaromana/villarromana-web
+   php -S localhost:8080
+
+3. Abre tu navegador (Safari, Chrome, etc.)
+4. En la barra de direcciones escribe: http://localhost:8080
+5. Presiona Enter
+
+================================================
+SI NO FUNCIONA:
+================================================
+
+PROBLEMA: "command not found: php"
+SOLUCIÓN: 
+1. Instala Homebrew:
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+2. Instala PHP:
+   brew install php
+
+PROBLEMA: "Address already in use"
+SOLUCIÓN: Usa otro puerto:
+   php -S localhost:8081
+   (y abre http://localhost:8081)
+
+================================================
+CREDENCIALES DEL EDITOR:
+Usuario: admin
+Contraseña: metadrop2024
+================================================

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" fill="#1a3a1a"/>
+  <text x="90" y="135" font-family="Playfair Display, serif" font-size="110" font-weight="bold" text-anchor="middle" fill="#d4a574">V</text>
+  <rect x="30" y="145" width="120" height="12" fill="#d4a574"/>
+</svg>

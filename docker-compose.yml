@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: villarromana-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      # Volumen para logs persistentes
+      - ./logs:/usr/share/nginx/html/logs
+    environment:
+      - TZ=Europe/Madrid
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    networks:
+      - villarromana-network
+    labels:
+      # Labels para Coolify
+      - "coolify.managed=true"
+      - "coolify.type=application"
+      - "coolify.name=villarromana-web"
+      # Traefik labels (si usas Traefik)
+      - "traefik.enable=true"
+      - "traefik.http.routers.villarromana.rule=Host(`villarromana.com`) || Host(`www.villarromana.com`)"
+      - "traefik.http.routers.villarromana.entrypoints=websecure"
+      - "traefik.http.routers.villarromana.tls.certresolver=letsencrypt"
+      - "traefik.http.services.villarromana.loadbalancer.server.port=80"
+      # Redirect www to non-www
+      - "traefik.http.middlewares.villarromana-www-redirect.redirectregex.regex=^https://www\\.(.*)"
+      - "traefik.http.middlewares.villarromana-www-redirect.redirectregex.replacement=https://$${1}"
+      - "traefik.http.routers.villarromana.middlewares=villarromana-www-redirect"
+
+networks:
+  villarromana-network:
+    driver: bridge
+
+# Volúmenes opcionales para datos persistentes
+volumes:
+  logs:
+    driver: local

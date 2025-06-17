@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Rural Hotel Villarromana</title>
+    <meta name="description" content="Photo gallery of Rural Hotel Villarromana. Images of our facilities, rooms, natural environment and unique experiences.">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="../index.html" class="logo">
+                        <img src="../../img/logo-villarromana.svg" alt="Villarromana Hotel Rural">
+                        <div>
+                            <h1>Villarromana</h1>
+                            <span>Hotel Rural</span>
+                        </div>
+                    </a>
+                    <button class="nav-toggle" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="../index.html"><span class="breadcrumb-home">🏠</span> Home</a></li>
+                        <li><a href="facilities.html">Facilities</a></li>
+                        <li><a href="location.html">Location</a></li>
+                        <li><a href="environment.html">Environment</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="language-selector">
+                        <button class="lang-button" id="langToggle">
+                            <span>English</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="../../pages/galeria.html" class="lang-option">
+                                <span>Español</span>
+                            </a>
+                            <a href="gallery.html" class="lang-option active">
+                                <span>English</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol>
+                    <li><a href="../index.html"><span class="breadcrumb-home">🏠</span> Home</a></li>
+                    <li class="separator">›</li>
+                    <li aria-current="page">Gallery</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <main>
+        <section class="page-hero" style="background-image: linear-gradient(rgba(44, 85, 48, 0.8), rgba(44, 85, 48, 0.8)), url('../../img/fachada1.jpg');">
+            <div class="page-hero-content">
+                <h1>Photo Gallery</h1>
+                <p>Discover Villarromana through our images</p>
+            </div>
+        </section>
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="hotel">Hotel</button>
+                    <button class="filter-btn" data-filter="rooms">Rooms</button>
+                    <button class="filter-btn" data-filter="environment">Environment</button>
+                    <button class="filter-btn" data-filter="gastronomy">Gastronomy</button>
+                    <button class="filter-btn" data-filter="experiences">Experiences</button>
+                </div>
+                <div class="gallery-grid" id="gallery">
+                    <!-- Hotel -->
+                    <div class="gallery-item" data-category="hotel">
+                        <img loading="lazy" src="../../img/fachada1.jpg" alt="Main hotel facade">
+                        <div class="gallery-category">Hotel</div>
+                    </div>
+                    <div class="gallery-item" data-category="hotel">
+                        <img loading="lazy" src="../../img/fachada2.jpg" alt="Hotel entrance">
+                        <div class="gallery-category">Hotel</div>
+                    </div>
+                    <div class="gallery-item" data-category="hotel">
+                        <img loading="lazy" src="../../img/fachada6.jpg" alt="Hotel exterior view">
+                        <div class="gallery-category">Hotel</div>
+                    </div>
+                    <div class="gallery-item" data-category="hotel">
+                        <img loading="lazy" src="../../img/fachada_estanque.jpg" alt="Hotel with pond">
+                        <div class="gallery-category">Hotel</div>
+                    </div>
+                    <div class="gallery-item" data-category="hotel">
+                        <img loading="lazy" src="../../img/salon arriba.jpg" alt="Main lounge">
+                        <div class="gallery-category">Hotel</div>
+                    </div>
+                    <div class="gallery-item" data-category="hotel">
+                        <img loading="lazy" src="../../img/chimenea.jpg" alt="Lounge with fireplace">
+                        <div class="gallery-category">Hotel</div>
+                    </div>
+                    <!-- Rooms -->
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/habitación.jpg" alt="Standard double room">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/habitación2.jpg" alt="Family room">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/habitación3.jpg" alt="Suite with terrace">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/habitación4.jpg" alt="Room with views">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/habitación5.jpg" alt="Deluxe room">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/habitación6.jpg" alt="Standard room">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/habitación7.jpg" alt="Single room">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <div class="gallery-item" data-category="rooms">
+                        <img loading="lazy" src="../../img/baño.jpg" alt="Modern bathroom">
+                        <div class="gallery-category">Rooms</div>
+                    </div>
+                    <!-- Environment -->
+                    <div class="gallery-item" data-category="environment">
+                        <img loading="lazy" src="../../img/estanque.jpg" alt="Natural pond">
+                        <div class="gallery-category">Environment</div>
+                    </div>
+                    <div class="gallery-item" data-category="environment">
+                        <img loading="lazy" src="../../img/estanque2.jpg" alt="Pond views">
+                        <div class="gallery-category">Environment</div>
+                    </div>
+                    <div class="gallery-item" data-category="environment">
+                        <img loading="lazy" src="../../img/fuente.jpg" alt="Garden fountain">
+                        <div class="gallery-category">Environment</div>
+                    </div>
+                    <div class="gallery-item" data-category="environment">
+                        <img loading="lazy" src="../../img/fuente fachada.jpg" alt="Facade fountain">
+                        <div class="gallery-category">Environment</div>
+                    </div>
+                    <div class="gallery-item" data-category="environment">
+                        <img loading="lazy" src="../../img/camino.jpg" alt="Natural trails">
+                        <div class="gallery-category">Environment</div>
+                    </div>
+                    <div class="gallery-item" data-category="environment">
+                        <img loading="lazy" src="../../img/piscina.jpg" alt="Swimming pool">
+                        <div class="gallery-category">Environment</div>
+                    </div>
+                    <!-- Gastronomy -->
+                    <div class="gallery-item" data-category="gastronomy">
+                        <img loading="lazy" src="../../img/aranxa-esteve-pOXHU0UEDcg-unsplash.jpg" alt="Buffet breakfast">
+                        <div class="gallery-category">Gastronomy</div>
+                    </div>
+                    <div class="gallery-item" data-category="gastronomy">
+                        <img loading="lazy" src="../../img/dogu-tuncer-Ibk7MEeIhxU-unsplash.jpg" alt="Traditional dishes">
+                        <div class="gallery-category">Gastronomy</div>
+                    </div>
+                    <div class="gallery-item" data-category="gastronomy">
+                        <img loading="lazy" src="../../img/6.jpg" alt="Regional wines">
+                        <div class="gallery-category">Gastronomy</div>
+                    </div>
+                    <div class="gallery-item" data-category="gastronomy">
+                        <img loading="lazy" src="../../img/7.jpg" alt="Garden produce">
+                        <div class="gallery-category">Gastronomy</div>
+                    </div>
+                    <!-- Experiences -->
+                    <div class="gallery-item" data-category="experiences">
+                        <img loading="lazy" src="../../img/bus.jpg" alt="Cycling routes">
+                        <div class="gallery-category">Experiences</div>
+                    </div>
+                    <div class="gallery-item" data-category="experiences">
+                        <img loading="lazy" src="../../img/channel.jpg" alt="Guided hiking">
+                        <div class="gallery-category">Experiences</div>
+                    </div>
+                    <div class="gallery-item" data-category="experiences">
+                        <img loading="lazy" src="../../img/castle6.jpg" alt="Astronomical observation">
+                        <div class="gallery-category">Experiences</div>
+                    </div>
+                    <div class="gallery-item" data-category="experiences">
+                        <img loading="lazy" src="../../img/edificio1.jpg" alt="Craft workshops">
+                        <div class="gallery-category">Experiences</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="instagram-feed">
+            <div class="container">
+                <h2>Follow us on Instagram</h2>
+                <p class="instagram-handle">@villarromanahotel</p>
+                <div class="instagram-grid">
+                    <div class="instagram-post" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white;">📸</div>
+                    <div class="instagram-post" style="background: linear-gradient(45deg, #bc1888 0%,#cc2366 25%,#dc2743 50%,#e6683c 75%,#f09433 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white;">📸</div>
+                    <div class="instagram-post" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white;">📸</div>
+                    <div class="instagram-post" style="background: linear-gradient(45deg, #bc1888 0%,#cc2366 25%,#dc2743 50%,#e6683c 75%,#f09433 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white;">📸</div>
+                    <div class="instagram-post" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white;">📸</div>
+                    <div class="instagram-post" style="background: linear-gradient(45deg, #bc1888 0%,#cc2366 25%,#dc2743 50%,#e6683c 75%,#f09433 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white;">📸</div>
+                </div>
+            </div>
+        </section>
+        <section class="cta">
+            <div class="container">
+                <h2>Like what you see?</h2>
+                <p>Come experience it in person</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-primary">Book now</a>
+                    <a href="location.html" class="btn-secondary">How to get here</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../../img/logo-villarromana-white.svg" alt="Villarromana Hotel Rural">
+                    </div>
+                    <h3>Rural Hotel Villarromana</h3>
+                    <p>Your haven of tranquility in Saldaña, where nature and comfort meet.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick links</h4>
+                    <ul>
+                        <li><a href="facilities.html">Facilities</a></li>
+                        <li><a href="location.html">How to get here</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Saldaña, Palencia<br>
+                    Tel: +34 979 892 026<br>
+                    Mobile: +34 615 389 480<br>
+                    info@villarromana.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rural Hotel Villarromana. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

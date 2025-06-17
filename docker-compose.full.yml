@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # Static web server (production)
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: villarromana-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./logs:/usr/share/nginx/html/logs
+    environment:
+      - TZ=Europe/Madrid
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    networks:
+      - villarromana-network
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=application"
+      - "coolify.name=villarromana-web"
+      - "traefik.enable=true"
+      - "traefik.http.routers.villarromana.rule=Host(`villarromana.com`) || Host(`www.villarromana.com`)"
+      - "traefik.http.routers.villarromana.entrypoints=websecure"
+      - "traefik.http.routers.villarromana.tls.certresolver=letsencrypt"
+      - "traefik.http.services.villarromana.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.villarromana-www-redirect.redirectregex.regex=^https://www\\.(.*)"
+      - "traefik.http.middlewares.villarromana-www-redirect.redirectregex.replacement=https://$${1}"
+      - "traefik.http.routers.villarromana.middlewares=villarromana-www-redirect"
+
+  # PHP web server with editor (development/admin)
+  web-php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: villarromana-web-php
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      # Persistent volumes for dynamic content
+      - ./logs:/var/www/html/logs
+      - ./content:/var/www/html/content
+      - ./img/uploads:/var/www/html/img/uploads
+      # For development - mount source code
+      - ./php:/var/www/html/php:ro
+      - ./js:/var/www/html/js:ro
+      - ./css:/var/www/html/css:ro
+      - ./img:/var/www/html/img:ro
+      - ./pages:/var/www/html/pages:ro
+      - ./en:/var/www/html/en:ro
+      - ./index.html:/var/www/html/index.html:ro
+      - ./404.html:/var/www/html/404.html:ro
+      - ./50x.html:/var/www/html/50x.html:ro
+    environment:
+      - TZ=Europe/Madrid
+      - PHP_MEMORY_LIMIT=128M
+      - PHP_MAX_EXECUTION_TIME=30
+      - PHP_UPLOAD_MAX_FILESIZE=10M
+      - PHP_POST_MAX_SIZE=12M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    networks:
+      - villarromana-network
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=application"
+      - "coolify.name=villarromana-web-editor"
+      - "traefik.enable=true"
+      - "traefik.http.routers.villarromana-editor.rule=Host(`edit.villarromana.com`)"
+      - "traefik.http.routers.villarromana-editor.entrypoints=websecure"
+      - "traefik.http.routers.villarromana-editor.tls.certresolver=letsencrypt"
+      - "traefik.http.services.villarromana-editor.loadbalancer.server.port=80"
+
+networks:
+  villarromana-network:
+    driver: bridge
+
+# Persistent volumes
+volumes:
+  logs:
+    driver: local
+  content:
+    driver: local
+  uploads:
+    driver: local

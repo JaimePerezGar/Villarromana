@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios - Hotel Rural Villarromana</title>
+    <meta name="description" content="Lee las opiniones y comentarios de nuestros huéspedes sobre el Hotel Rural Villarromana. Experiencias reales de quienes nos han visitado.">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="../index.html" class="logo">
+                        <img src="../img/logo-villarromana.svg" alt="Villarromana Hotel Rural">
+                        <div>
+                            <h1>Villarromana</h1>
+                            <span>Hotel Rural</span>
+                        </div>
+                    </a>
+                    <button class="nav-toggle" aria-label="Abrir menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="instalaciones.html">Instalaciones</a></li>
+                        <li><a href="ubicacion.html">Ubicación</a></li>
+                        <li><a href="entorno.html">Entorno</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="comentarios.html">Comentarios</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                    <div class="language-selector">
+                        <button class="lang-button" id="langToggle">
+                            <span>Español</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="comentarios.html" class="lang-option active">
+                                <span>Español</span>
+                            </a>
+                            <a href="../en/pages/reviews.html" class="lang-option">
+                                <span>English</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li class="separator">›</li>
+                    <li aria-current="page">Comentarios</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <main>
+        <section class="page-hero" style="background-image: linear-gradient(rgba(44, 85, 48, 0.8), rgba(44, 85, 48, 0.8)), url('../img/fachada2.jpg');">
+            <div class="page-hero-content">
+                <h1>Opiniones de Huéspedes</h1>
+                <p>Lo que dicen de nosotros quienes nos han visitado</p>
+            </div>
+        </section>
+        <section class="rating-summary">
+            <div class="container">
+                <div class="rating-overview">
+                    <div class="overall-rating">
+                        <h2>Valoración General</h2>
+                        <div class="rating-score">
+                            <span class="score-number average-rating">4.8</span>
+                            <div class="rating-stars">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star half">★</span>
+                            </div>
+                            <p class="rating-count total-reviews">Basado en 234 opiniones</p>
+                        </div>
+                    </div>
+                    <div class="rating-breakdown">
+                        <div class="rating-category">
+                            <span class="category-name">Ubicación</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 96%"></div>
+                            </div>
+                            <span class="category-score">4.8</span>
+                        </div>
+                        <div class="rating-category">
+                            <span class="category-name">Limpieza</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 98%"></div>
+                            </div>
+                            <span class="category-score">4.9</span>
+                        </div>
+                        <div class="rating-category">
+                            <span class="category-name">Servicio</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="category-score">5.0</span>
+                        </div>
+                        <div class="rating-category">
+                            <span class="category-name">Confort</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 94%"></div>
+                            </div>
+                            <span class="category-score">4.7</span>
+                        </div>
+                        <div class="rating-category">
+                            <span class="category-name">Calidad-Precio</span>
+                            <div class="rating-bar">
+                                <div class="rating-fill" style="width: 92%"></div>
+                            </div>
+                            <span class="category-score">4.6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="comments-section">
+            <div class="container">
+                <h2>Comentarios Recientes</h2>
+                <div class="comments-grid">
+                    <article class="comment-card">
+                        <div class="comment-header">
+                            <div>
+                                <h3 class="comment-author">María González</h3>
+                                <span class="comment-date">Noviembre 2024</span>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                            </div>
+                        </div>
+                        <p class="comment-text">Una experiencia inolvidable. El hotel es precioso, las habitaciones muy cómodas y limpias. El personal es extraordinariamente amable y atento. El entorno natural es espectacular, perfecto para desconectar. El desayuno casero delicioso. Volveremos sin duda.</p>
+                        <div class="comment-tags">
+                            <span class="tag">Escapada romántica</span>
+                            <span class="tag">2 noches</span>
+                        </div>
+                    </article>
+                    <article class="comment-card">
+                        <div class="comment-header">
+                            <div>
+                                <h3 class="comment-author">Carlos Rodríguez</h3>
+                                <span class="comment-date">Octubre 2024</span>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                            </div>
+                        </div>
+                        <p class="comment-text">Excelente hotel rural. La ubicación es perfecta para visitar la villa romana y hacer rutas por la zona. Las instalaciones están muy bien cuidadas y la decoración tiene mucho encanto. Destacar la atención del personal, siempre dispuestos a ayudar con recomendaciones.</p>
+                        <div class="comment-tags">
+                            <span class="tag">Viaje familiar</span>
+                            <span class="tag">3 noches</span>
+                        </div>
+                    </article>
+                    <article class="comment-card">
+                        <div class="comment-header">
+                            <div>
+                                <h3 class="comment-author">Ana Martín</h3>
+                                <span class="comment-date">Octubre 2024</span>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star">★</span>
+                            </div>
+                        </div>
+                        <p class="comment-text">Muy buen hotel con mucho encanto. Las habitaciones son amplias y confortables. El salón con chimenea es ideal para las tardes de otoño. La única pega es que el WiFi a veces va un poco lento, pero tampoco vas a un sitio así para estar conectado. Muy recomendable.</p>
+                        <div class="comment-tags">
+                            <span class="tag">Fin de semana</span>
+                            <span class="tag">2 noches</span>
+                        </div>
+                    </article>
+                    <article class="comment-card">
+                        <div class="comment-header">
+                            <div>
+                                <h3 class="comment-author">Laura Fernández</h3>
+                                <span class="comment-date">Septiembre 2024</span>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                            </div>
+                        </div>
+                        <p class="comment-text">Maravilloso lugar para desconectar. El entorno natural es impresionante, hicimos varias rutas de senderismo preciosas. El hotel está decorado con mucho gusto, combinando lo rústico con las comodidades modernas. El desayuno buffet espectacular con productos locales. Personal encantador.</p>
+                        <div class="comment-tags">
+                            <span class="tag">Escapada relax</span>
+                            <span class="tag">4 noches</span>
+                        </div>
+                    </article>
+                    <article class="comment-card">
+                        <div class="comment-header">
+                            <div>
+                                <h3 class="comment-author">Patricia Ruiz</h3>
+                                <span class="comment-date">Agosto 2024</span>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                            </div>
+                        </div>
+                        <p class="comment-text">Un hotel con mucho encanto en un entorno privilegiado. Las vistas desde la terraza son espectaculares. Fuimos con niños y hay mucho espacio para que jueguen. El personal super amable, nos dieron muchas ideas de excursiones por la zona. La relación calidad-precio es excelente.</p>
+                        <div class="comment-tags">
+                            <span class="tag">Vacaciones familiares</span>
+                            <span class="tag">5 noches</span>
+                        </div>
+                    </article>
+                </div>
+                <!-- Contenedor dinámico para comentarios -->
+                <div id="reviews-container" class="reviews-list">
+                    <!-- Los comentarios se cargarán aquí dinámicamente -->
+                </div>
+                <!-- Paginación -->
+                <div class="reviews-pagination">
+                    <!-- La paginación se generará dinámicamente -->
+                </div>
+            </div>
+        </section>
+        <section class="comment-form-section">
+            <div class="container">
+                <h2>Comparte tu Experiencia</h2>
+                <p class="form-intro">¿Has sido nuestro huésped? Nos encantaría conocer tu opinión</p>
+                <form class="comment-form" id="review-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reviewer-name">Nombre *</label>
+                            <input type="text" id="reviewer-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewer-email">Email *</label>
+                            <input type="email" id="reviewer-email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="stay-date">Fecha de estancia</label>
+                            <input type="month" id="stay-date" name="stayDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="room-type">Tipo de habitación</label>
+                            <select id="room-type" name="roomType">
+                                <option value="">Selecciona...</option>
+                                <option value="doble">Habitación Doble</option>
+                                <option value="familiar">Habitación Familiar</option>
+                                <option value="suite">Suite</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Valoración general *</label>
+                        <div class="star-rating-input">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-title">Título de tu reseña *</label>
+                        <input type="text" id="review-title" name="title" required placeholder="Resume tu experiencia">
+                    </div>
+                    <div class="form-group">
+                        <label for="review-text">Tu comentario *</label>
+                        <textarea id="review-text" name="review" rows="6" required placeholder="Cuéntanos tu experiencia en Villarromana..."></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" name="consent" required>
+                            Acepto que mi comentario sea publicado en la web
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary">Enviar comentario</button>
+                </form>
+                <div id="review-message" class="form-message" style="display: none;"></div>
+            </div>
+        </section>
+        <section class="cta">
+            <div class="container">
+                <h2>Únete a nuestros huéspedes satisfechos</h2>
+                <p>Reserva tu estancia y crea tu propia historia en Villarromana</p>
+                <div class="cta-buttons">
+                    <a href="contacto.html" class="btn-primary">Reservar ahora</a>
+                    <a href="instalaciones.html" class="btn-secondary">Ver instalaciones</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../img/logo-villarromana-white.svg" alt="Villarromana Hotel Rural">
+                    </div>
+                    <h3>Hotel Rural Villarromana</h3>
+                    <p>Tu refugio de tranquilidad en Saldaña, donde la naturaleza y el confort se encuentran.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces rápidos</h4>
+                    <ul>
+                        <li><a href="instalaciones.html">Instalaciones</a></li>
+                        <li><a href="ubicacion.html">Cómo llegar</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Saldaña, Palencia<br>
+                    Tel: +34 979 892 026<br>
+                    Móvil: +34 615 389 480<br>
+                    info@villarromana.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hotel Rural Villarromana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/34615389480?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20el%20Hotel%20Rural%20Villarromana" class="whatsapp-float" target="_blank" aria-label="Chatea por WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="white"/>
+        </svg>
+    </a>
+    <script src="../js/main.js"></script>
+</html>

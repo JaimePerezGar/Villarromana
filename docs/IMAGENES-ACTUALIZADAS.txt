@@ -1,0 +1,48 @@
+================================================
+🖼️  IMÁGENES ACTUALIZADAS EN EL SITIO
+================================================
+
+PÁGINA PRINCIPAL (index.html)
+-----------------------------
+Hero Slider:
+  • Slide 1: hotel-rural-villarromana-general-bdf1434.jpg
+  • Slide 2: hotel-rural-villarromana (1).jpg
+  • Slide 3: hotel-rural-villarromana (2).jpg
+
+Tarjetas de Habitaciones:
+  • Habitación Doble: DSC_0224.jpg
+  • Habitación Familiar: DSC_0236-1.jpg
+  • Suite: DSC_0270.jpg
+
+Sección Entorno:
+  • Principal: hotel-rural-villarromana.jpg
+  • Galería: DSC_0221-1-700x300.jpg, hotel-rural-villarromana (1).jpg, hotel-rural-villarromana (2).jpg
+
+PÁGINAS INTERIORES
+------------------
+Instalaciones:
+  • Hero: hotel-rural-villarromana-general-bdf1434.jpg
+  • 6 tarjetas con diferentes imágenes
+
+Entorno:
+  • Hero: DSC_0221-1-700x300.jpg
+
+Galería:
+  • Hero: hotel-rural-villarromana-general-bdf1434.jpg
+  • Todas las imágenes en la galería
+
+Ubicación:
+  • Hero: hotel-rural-villarromana.jpg
+
+Contacto:
+  • Hero: DSC_0221-1-700x300.jpg
+
+Comentarios:
+  • Hero: hotel-rural-villarromana-general-bdf1434.jpg
+
+================================================
+Para ver los cambios:
+1. Abre tu navegador
+2. Ve a: http://localhost:8080
+3. Navega por las diferentes páginas
+================================================

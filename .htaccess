@@ -1,0 +1,50 @@
+# Configuración para el editor de contenido
+# Este archivo es para servidores Apache
+
+# Habilitar PHP
+AddType application/x-httpd-php .php
+AddHandler application/x-httpd-php .php
+
+# Configuración de uploads
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+php_value max_execution_time 60
+php_value memory_limit 128M
+
+# Permitir acceso a archivos necesarios
+<FilesMatch "\.(php|html|css|js|jpg|jpeg|png|gif|webp)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Proteger directorios sensibles
+<Directory "php/data">
+    Order Deny,Allow
+    Deny from all
+</Directory>
+
+# Habilitar CORS para desarrollo local
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+
+# Reescritura de URLs (opcional)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Redirigir a index.html si no se especifica archivo
+    DirectoryIndex index.html
+</IfModule>
+
+# Caché de imágenes
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+</IfModule>

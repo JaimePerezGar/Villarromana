@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Rural Hotel Villarromana</title>
+    <meta name="description" content="Contact Rural Hotel Villarromana. Book your stay at our rural hotel in Saldaña, Palencia. Phone, email and contact form.">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="../index.html" class="logo">
+                        <img src="../../img/logo-villarromana.svg" alt="Villarromana Hotel Rural">
+                        <div>
+                            <h1>Villarromana</h1>
+                            <span>Hotel Rural</span>
+                        </div>
+                    </a>
+                    <button class="nav-toggle" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="../index.html"><span class="breadcrumb-home">🏠</span> Home</a></li>
+                        <li><a href="facilities.html">Facilities</a></li>
+                        <li><a href="location.html">Location</a></li>
+                        <li><a href="environment.html">Environment</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="language-selector">
+                        <button class="lang-button" id="langToggle">
+                            <span>English</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="../../pages/contacto.html" class="lang-option">
+                                <span>Español</span>
+                            </a>
+                            <a href="contact.html" class="lang-option active">
+                                <span>English</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="breadcrumbs">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol>
+                    <li><a href="../index.html"><span class="breadcrumb-home">🏠</span> Home</a></li>
+                    <li class="separator">›</li>
+                    <li aria-current="page">Contact</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <main>
+        <section class="page-hero" style="background-image: linear-gradient(rgba(44, 85, 48, 0.8), rgba(44, 85, 48, 0.8)), url('../../img/fuente.jpg');">
+            <div class="page-hero-content">
+                <h1>Contact</h1>
+                <p>We are here to help you</p>
+            </div>
+        </section>
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h2>Contact Information</h2>
+                        <div class="info-item">
+                            <h3>Address</h3>
+                            <p>Calle Mayor, 123<br>34100 Saldaña, Palencia<br>Castilla y León, Spain</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Phone</h3>
+                            <p><a href="tel:+34979892026">+34 979 892 026</a><br>
+                            <a href="tel:+34615389480">+34 615 389 480</a></p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@villarromana.com">info@villarromana.com</a></p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Office Hours</h3>
+                            <p>Monday to Sunday: 8:00 AM - 10:00 PM</p>
+                        </div>
+                        <div class="social-contact">
+                            <h3>Follow us</h3>
+                            <div class="social-links">
+                                <a href="#" aria-label="Facebook">📘</a>
+                                <a href="#" aria-label="Instagram">📷</a>
+                                <a href="#" aria-label="Twitter">🐦</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-wrapper">
+                        <h2>Send us a Message</h2>
+                        <form id="contact-form" class="contact-form" action="../../php/send-contact-dev.php" method="POST">
+                            <div class="form-group">
+                                <label for="name">Full name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="999999999">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="checkin">Check-in date</label>
+                                    <input type="date" id="checkin" name="checkin">
+                                </div>
+                                <div class="form-group">
+                                    <label for="checkout">Check-out date</label>
+                                    <input type="date" id="checkout" name="checkout">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="booking">Booking Request</option>
+                                    <option value="information">General Information</option>
+                                    <option value="events">Events and Celebrations</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" name="privacy" required>
+                                    I have read and accept the privacy policy *
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-primary">Send message</button>
+                        </form>
+                        <div id="form-message" class="form-message"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="map-section">
+            <div class="container">
+                <h2>How to Get Here</h2>
+                <div class="map-wrapper">
+                    <div id="map" class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2950.5!2d-4.732911972426705!3d42.527823395795444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDLCsDMxJzQwLjIiTiA0wrA0Myc1OC41Ilc!5e0!3m2!1ses!2ses!4v1702564800000!5m2!1ses!2ses" 
+                            width="100%" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="directions">
+                        <h3>Directions</h3>
+                        <ul>
+                            <li><strong>From Madrid (280 km):</strong> A-6 to Tordesillas, then A-62 towards Palencia</li>
+                            <li><strong>From Valladolid (120 km):</strong> A-62 towards Palencia, Saldaña exit</li>
+                            <li><strong>From Burgos (100 km):</strong> A-231 towards León to Osorno, then P-227</li>
+                            <li><strong>From León (95 km):</strong> A-231 towards Burgos to Sahagún, then CL-615</li>
+                        </ul>
+                        <p class="parking-info">🚗 Free parking available for our guests</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../../img/logo-villarromana-white.svg" alt="Villarromana Hotel Rural">
+                    </div>
+                    <h3>Rural Hotel Villarromana</h3>
+                    <p>Your haven of tranquility in Saldaña, where nature and comfort meet.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick links</h4>
+                    <ul>
+                        <li><a href="facilities.html">Facilities</a></li>
+                        <li><a href="location.html">How to get here</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Saldaña, Palencia<br>
+                    Tel: +34 979 892 026<br>
+                    Mobile: +34 615 389 480<br>
+                    info@villarromana.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rural Hotel Villarromana. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
