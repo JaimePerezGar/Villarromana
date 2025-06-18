@@ -21,7 +21,8 @@
         phpBaseUrl: window.location.pathname.includes('/en/') ? '../php/' : 'php/',
         sessionKey: 'villarromana_editor_session',
         editableSelectors: 'main p, main h1, main h2, main h3, main h4, main ul, main ol, main blockquote, main img, main figure',
-        excludeSelectors: '.no-edit, .navbar, .footer, .hero-content, .cta-button, .room-card, .feature-card'
+        imageSelectors: 'img, .hero, .hero-section, .bg-image, [style*="background-image"]',
+        excludeSelectors: '.no-edit, .navbar, .footer'
     };
 
     // State Management
@@ -476,13 +477,122 @@
                 }
 
                 /* Image editing */
-                body.editor-active img.editable {
+                body.editor-active img.editable-image,
+                body.editor-active .editable-bg-image {
                     cursor: pointer;
                     position: relative;
                 }
 
-                body.editor-active img.editable:hover {
-                    opacity: 0.9;
+                body.editor-active img.editable-image:hover {
+                    opacity: 0.8;
+                    outline: 3px solid #4a904d;
+                    outline-offset: 3px;
+                }
+
+                body.editor-active .editable-bg-image {
+                    position: relative;
+                }
+
+                body.editor-active .editable-bg-image::after {
+                    content: '🖼️ Click to change background';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(44, 85, 48, 0.9);
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    font-size: 14px;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    pointer-events: none;
+                    z-index: 100;
+                }
+
+                body.editor-active .editable-bg-image:hover::after {
+                    opacity: 1;
+                }
+
+                /* Image upload modal */
+                .editor-image-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10001;
+                }
+
+                .editor-image-modal-content {
+                    background: white;
+                    padding: 30px;
+                    border-radius: 10px;
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                }
+
+                .editor-image-modal h3 {
+                    margin: 0 0 20px 0;
+                    color: #2c5530;
+                }
+
+                .editor-image-preview {
+                    margin: 20px 0;
+                    text-align: center;
+                }
+
+                .editor-image-preview img {
+                    max-width: 100%;
+                    max-height: 400px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+
+                .editor-image-dropzone {
+                    border: 2px dashed #4a904d;
+                    border-radius: 10px;
+                    padding: 40px;
+                    text-align: center;
+                    background: #f9f9f9;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+
+                .editor-image-dropzone:hover,
+                .editor-image-dropzone.drag-over {
+                    background: #e8f5e9;
+                    border-color: #2c5530;
+                }
+
+                .editor-image-dropzone p {
+                    margin: 10px 0;
+                    color: #666;
+                }
+
+                .editor-upload-progress {
+                    display: none;
+                    margin: 20px 0;
+                }
+
+                .editor-upload-progress-bar {
+                    height: 4px;
+                    background: #e0e0e0;
+                    border-radius: 2px;
+                    overflow: hidden;
+                }
+
+                .editor-upload-progress-fill {
+                    height: 100%;
+                    background: #4a904d;
+                    width: 0;
+                    transition: width 0.3s;
                 }
 
                 /* Status indicator */
@@ -690,6 +800,179 @@
                     this.updateFormatBar();
                 });
             });
+            
+            // Create image upload modal
+            this.createImageUploadModal();
+        }
+
+        createImageUploadModal() {
+            const modal = document.createElement('div');
+            modal.className = 'editor-image-modal';
+            modal.innerHTML = `
+                <div class="editor-image-modal-content">
+                    <h3>Upload Image</h3>
+                    <div class="editor-image-dropzone" id="editor-image-dropzone">
+                        <p>📁 Drag and drop an image here</p>
+                        <p>or</p>
+                        <button class="editor-btn editor-btn-primary">Choose File</button>
+                    </div>
+                    <div class="editor-upload-progress">
+                        <p>Uploading...</p>
+                        <div class="editor-upload-progress-bar">
+                            <div class="editor-upload-progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="editor-image-preview" style="display: none;">
+                        <img id="editor-preview-img" src="" alt="Preview">
+                    </div>
+                    <div class="editor-toolbar-group" style="margin-top: 20px; justify-content: flex-end; display: none;" id="editor-image-actions">
+                        <button class="editor-btn" id="editor-image-cancel">Cancel</button>
+                        <button class="editor-btn editor-btn-primary" id="editor-image-apply">Apply</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            this.imageModal = modal;
+            
+            // Setup modal events
+            this.setupImageModalEvents();
+        }
+
+        setupImageModalEvents() {
+            const modal = this.imageModal;
+            const dropzone = modal.querySelector('#editor-image-dropzone');
+            const fileButton = dropzone.querySelector('button');
+            const preview = modal.querySelector('.editor-image-preview');
+            const previewImg = modal.querySelector('#editor-preview-img');
+            const actions = modal.querySelector('#editor-image-actions');
+            const cancelBtn = modal.querySelector('#editor-image-cancel');
+            const applyBtn = modal.querySelector('#editor-image-apply');
+            const progress = modal.querySelector('.editor-upload-progress');
+            const progressFill = modal.querySelector('.editor-upload-progress-fill');
+            
+            // File input
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+            modal.appendChild(fileInput);
+            
+            // Current target
+            let currentTarget = null;
+            let targetType = null;
+            let newImageData = null;
+            
+            // File button click
+            fileButton.addEventListener('click', () => fileInput.click());
+            
+            // File selection
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) this.processImageFile(file);
+            });
+            
+            // Drag and drop
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('drag-over');
+            });
+            
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('drag-over');
+            });
+            
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('drag-over');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    this.processImageFile(file);
+                }
+            });
+            
+            // Process file
+            this.processImageFile = (file) => {
+                // Show progress
+                progress.style.display = 'block';
+                progressFill.style.width = '0%';
+                
+                // Simulate progress
+                let progressValue = 0;
+                const progressInterval = setInterval(() => {
+                    progressValue += 10;
+                    progressFill.style.width = progressValue + '%';
+                    if (progressValue >= 90) clearInterval(progressInterval);
+                }, 100);
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    clearInterval(progressInterval);
+                    progressFill.style.width = '100%';
+                    
+                    setTimeout(() => {
+                        progress.style.display = 'none';
+                        newImageData = e.target.result;
+                        previewImg.src = newImageData;
+                        preview.style.display = 'block';
+                        actions.style.display = 'flex';
+                        dropzone.style.display = 'none';
+                    }, 300);
+                };
+                reader.readAsDataURL(file);
+            };
+            
+            // Apply button
+            applyBtn.addEventListener('click', () => {
+                if (newImageData && currentTarget) {
+                    if (targetType === 'image') {
+                        currentTarget.src = newImageData;
+                    } else if (targetType === 'background') {
+                        currentTarget.style.backgroundImage = `url(${newImageData})`;
+                    }
+                    state.hasChanges = true;
+                    this.updateStatus();
+                    this.showNotification('Image updated', 'success');
+                    this.hideImageModal();
+                }
+            });
+            
+            // Cancel button
+            cancelBtn.addEventListener('click', () => this.hideImageModal());
+            
+            // Modal background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) this.hideImageModal();
+            });
+            
+            // Store references for showImageUploadModal
+            this.imageModalElements = {
+                modal, dropzone, preview, previewImg, actions, progress,
+                fileInput, setTarget: (target, type) => {
+                    currentTarget = target;
+                    targetType = type;
+                    newImageData = null;
+                }
+            };
+        }
+
+        showImageUploadModal(target, type) {
+            const { modal, dropzone, preview, actions, fileInput, setTarget } = this.imageModalElements;
+            
+            // Reset modal
+            dropzone.style.display = 'block';
+            preview.style.display = 'none';
+            actions.style.display = 'none';
+            fileInput.value = '';
+            
+            // Set target
+            setTarget(target, type);
+            
+            // Show modal
+            modal.style.display = 'flex';
+        }
+
+        hideImageModal() {
+            this.imageModal.style.display = 'none';
         }
 
         showLoginModal() {
@@ -757,11 +1040,18 @@
         }
 
         initializeEditableElements() {
+            // Initialize text elements
             const elements = document.querySelectorAll(CONFIG.editableSelectors);
             
             elements.forEach(element => {
                 // Skip excluded elements
                 if (element.closest(CONFIG.excludeSelectors)) return;
+                
+                // Handle images separately
+                if (element.tagName === 'IMG') {
+                    this.makeImageEditable(element);
+                    return;
+                }
                 
                 // Make editable
                 element.classList.add('editable');
@@ -784,6 +1074,71 @@
                 element.addEventListener('dragend', (e) => this.handleDragEnd(e, element));
                 element.addEventListener('dragover', (e) => this.handleDragOver(e, element));
                 element.addEventListener('drop', (e) => this.handleDrop(e, element));
+            });
+            
+            // Initialize ALL images (including those not in main)
+            this.initializeAllImages();
+        }
+
+        initializeAllImages() {
+            // Find ALL images on the page
+            const allImages = document.querySelectorAll('img');
+            allImages.forEach(img => {
+                if (!img.classList.contains('editable-image') && !img.closest(CONFIG.excludeSelectors)) {
+                    this.makeImageEditable(img);
+                }
+            });
+            
+            // Find all elements with background images
+            const elementsWithBg = document.querySelectorAll(CONFIG.imageSelectors);
+            elementsWithBg.forEach(element => {
+                if (element.tagName !== 'IMG' && !element.closest(CONFIG.excludeSelectors)) {
+                    const bgImage = window.getComputedStyle(element).backgroundImage;
+                    if (bgImage && bgImage !== 'none') {
+                        this.makeBackgroundEditable(element);
+                    }
+                }
+            });
+            
+            // Check for inline style background images
+            const inlineStyleElements = document.querySelectorAll('[style*="background-image"]');
+            inlineStyleElements.forEach(element => {
+                if (!element.classList.contains('editable-bg-image') && !element.closest(CONFIG.excludeSelectors)) {
+                    this.makeBackgroundEditable(element);
+                }
+            });
+        }
+
+        makeImageEditable(img) {
+            img.classList.add('editable-image');
+            img.style.cursor = 'pointer';
+            
+            // Save original src
+            state.saveOriginalContent(img, img.src);
+            
+            // Add click handler
+            img.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.showImageUploadModal(img, 'image');
+            });
+        }
+
+        makeBackgroundEditable(element) {
+            element.classList.add('editable-bg-image');
+            
+            // Save original background
+            const originalBg = window.getComputedStyle(element).backgroundImage || element.style.backgroundImage;
+            state.saveOriginalContent(element, originalBg);
+            
+            // Add click handler
+            element.addEventListener('click', (e) => {
+                // Only trigger if clicking directly on the element, not its children
+                if (e.target === element) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.showImageUploadModal(element, 'background');
+                }
             });
         }
 
@@ -823,9 +1178,20 @@
                 element.querySelectorAll('.editor-add-btn, .editor-delete-btn').forEach(btn => btn.remove());
             });
             
+            // Clean up images
+            document.querySelectorAll('.editable-image').forEach(img => {
+                img.classList.remove('editable-image');
+                img.style.cursor = '';
+            });
+            
+            document.querySelectorAll('.editable-bg-image').forEach(element => {
+                element.classList.remove('editable-bg-image');
+            });
+            
             // Hide menus
             this.hideInsertMenu();
             this.hideFormatBar();
+            this.hideImageModal();
             
             // Clear state
             state.clearOriginalContent();
@@ -936,8 +1302,8 @@
                         state.insertionTarget.parentNode.insertBefore(img, state.insertionTarget.nextSibling);
                         
                         // Make it editable
+                        this.makeImageEditable(img);
                         this.addElementControls(img);
-                        img.addEventListener('click', () => this.replaceImage(img));
                         
                         state.hasChanges = true;
                         this.updateStatus();
@@ -950,23 +1316,7 @@
         }
 
         replaceImage(img) {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (ev) => {
-                        img.src = ev.target.result;
-                        state.hasChanges = true;
-                        this.updateStatus();
-                        this.showNotification('Image updated', 'success');
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            input.click();
+            this.showImageUploadModal(img, 'image');
         }
 
         deleteElement(element) {
@@ -1138,6 +1488,17 @@
                 el.contentEditable = 'false';
                 el.draggable = false;
             });
+            
+            // Remove image editing classes
+            document.querySelectorAll('.editable-image').forEach(img => {
+                img.classList.remove('editable-image');
+                img.style.cursor = '';
+            });
+            
+            document.querySelectorAll('.editable-bg-image').forEach(element => {
+                element.classList.remove('editable-bg-image');
+            });
+            
             document.body.classList.remove('editor-active');
         }
 
