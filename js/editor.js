@@ -70,7 +70,7 @@
             cursor: pointer;
             z-index: 10000;
             font-size: 18px;
-            display: flex;
+            display: none; /* Hide by default, will be shown on desktop */
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -318,16 +318,13 @@
     // Adjust admin button position based on screen size
     function adjustAdminButtonPosition() {
         const adminBtn = document.getElementById('editor-admin-btn');
-        if (adminBtn) {
+        if (adminBtn && !isEditMode) { // Only adjust if not in edit mode
             if (window.innerWidth <= 768) {
-                // On mobile, position below header to avoid menu toggle
-                adminBtn.style.top = '90px';
-                adminBtn.style.right = '20px';
-                adminBtn.style.width = '45px';
-                adminBtn.style.height = '45px';
-                adminBtn.style.fontSize = '20px';
+                // On mobile, hide the admin button completely
+                adminBtn.style.display = 'none';
             } else if (window.innerWidth <= 1024) {
-                // On tablets, slightly adjust position
+                // On tablets, show button with adjusted position to avoid language selector
+                adminBtn.style.display = 'flex';
                 adminBtn.style.top = '25px';
                 adminBtn.style.right = '70px';
                 adminBtn.style.width = '40px';
@@ -335,6 +332,7 @@
                 adminBtn.style.fontSize = '18px';
             } else {
                 // Default desktop position
+                adminBtn.style.display = 'flex';
                 adminBtn.style.top = '20px';
                 adminBtn.style.right = '20px';
                 adminBtn.style.width = '40px';
@@ -699,7 +697,8 @@
         sessionStorage.removeItem(CONFIG.sessionKey);
         document.body.classList.remove('editor-active');
         document.getElementById('editor-toolbar').style.display = 'none';
-        document.getElementById('editor-admin-btn').style.display = 'block';
+        // Re-check screen size to determine if admin button should be shown
+        adjustAdminButtonPosition();
         
         // Remove contenteditable
         document.querySelectorAll('[data-editable="true"]').forEach(el => {
