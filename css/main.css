@@ -2168,7 +2168,7 @@ section:nth-child(even):not(.hero) {
 
 /* Location Advantages */
 .location-advantages {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2c5530 0%, #4a904d 100%);
     padding: 80px 0;
     color: white;
 }
