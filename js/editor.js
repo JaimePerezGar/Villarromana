@@ -57,9 +57,6 @@
         adminBtn.innerHTML = '🔐';
         adminBtn.title = 'Admin Login';
         adminBtn.style.cssText = `
-            position: fixed;
-            top: 25px;
-            right: 160px;
             width: 40px;
             height: 40px;
             padding: 0;
@@ -68,17 +65,50 @@
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            z-index: 10000;
             font-size: 18px;
-            display: none; /* Hide by default, will be shown on desktop */
+            display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.3s ease, top 0.3s ease, right 0.3s ease, width 0.3s ease, height 0.3s ease;
+            transition: all 0.3s ease;
+            margin-left: 15px;
         `;
         
-        // Set initial position based on screen size
-        document.body.appendChild(adminBtn);
+        // Insert admin button into nav-wrapper after language selector
+        const navWrapper = document.querySelector('.nav-wrapper');
+        const languageSelector = document.querySelector('.language-selector');
+        
+        if (navWrapper && languageSelector) {
+            // Create a container for both language selector and admin button
+            const controlsContainer = document.createElement('div');
+            controlsContainer.className = 'nav-controls';
+            controlsContainer.style.cssText = `
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            `;
+            
+            // Insert the container after the nav menu
+            const navMenu = navWrapper.querySelector('.nav-menu');
+            if (navMenu && navMenu.nextSibling === languageSelector) {
+                // Remove language selector from its current position
+                languageSelector.remove();
+                
+                // Add both to the container
+                controlsContainer.appendChild(languageSelector);
+                controlsContainer.appendChild(adminBtn);
+                
+                // Insert the container
+                navWrapper.appendChild(controlsContainer);
+            } else {
+                // Fallback: just insert after language selector
+                languageSelector.parentNode.insertBefore(adminBtn, languageSelector.nextSibling);
+            }
+        } else {
+            // Fallback to body if nav structure not found
+            document.body.appendChild(adminBtn);
+        }
+        
         adjustAdminButtonPosition();
         adminBtn.onmouseover = () => {
             adminBtn.style.transform = 'scale(1.1)';
@@ -242,6 +272,14 @@
                 opacity: 1;
             }
             
+            /* Nav controls container for proper alignment */
+            .nav-controls {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            /* Hide admin button on mobile within nav menu */
             @media (max-width: 768px) {
                 #editor-toolbar > div {
                     flex-direction: column;
@@ -254,6 +292,17 @@
                 
                 #editor-status {
                     display: none;
+                }
+                
+                /* Hide admin button on mobile */
+                #editor-admin-btn {
+                    display: none !important;
+                }
+                
+                /* Ensure nav-controls doesn't break mobile layout */
+                .nav-controls {
+                    width: 100%;
+                    justify-content: center;
                 }
             }
         `;
@@ -322,22 +371,9 @@
             if (window.innerWidth <= 768) {
                 // On mobile, hide the admin button completely
                 adminBtn.style.display = 'none';
-            } else if (window.innerWidth <= 1024) {
-                // On tablets, show button with adjusted position to avoid language selector
-                adminBtn.style.display = 'flex';
-                adminBtn.style.top = '25px';
-                adminBtn.style.right = '70px';
-                adminBtn.style.width = '40px';
-                adminBtn.style.height = '40px';
-                adminBtn.style.fontSize = '18px';
             } else {
-                // Default desktop position - aligned with language selector
+                // On desktop and tablets, show the button
                 adminBtn.style.display = 'flex';
-                adminBtn.style.top = '25px';
-                adminBtn.style.right = '160px';
-                adminBtn.style.width = '40px';
-                adminBtn.style.height = '40px';
-                adminBtn.style.fontSize = '18px';
             }
         }
     }
@@ -436,7 +472,10 @@
         isEditMode = true;
         document.body.classList.add('editor-active');
         document.getElementById('editor-toolbar').style.display = 'block';
-        document.getElementById('editor-admin-btn').style.display = 'none';
+        const adminBtn = document.getElementById('editor-admin-btn');
+        if (adminBtn) {
+            adminBtn.style.display = 'none';
+        }
         
         updateStatus('Edit mode enabled');
         
