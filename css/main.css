@@ -13,7 +13,7 @@
     --light-gray: #f5f5f5;
     --border-radius: 8px;
     --transition: all 0.3s ease;
-    --header-height: 80px;
+    --header-height: 90px;
     --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
@@ -106,8 +106,9 @@ a:hover {
 }
 
 .logo img {
-    height: 50px;
+    height: 70px;
     width: auto;
+    transition: height 0.3s ease;
 }
 
 /* Navigation */
@@ -1158,8 +1159,18 @@ section:nth-child(even):not(.hero) {
 .p-4 { padding: 2rem; }
 .p-5 { padding: 3rem; }
 
+/* Additional Header Adjustments */
+.nav-wrapper > * {
+    align-items: center;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+    /* Mobile logo size */
+    .logo img {
+        height: 50px; /* Keep original size on mobile */
+    }
+    
     /* Mobile Navigation */
     .nav-menu {
         position: fixed;
@@ -2876,5 +2887,12 @@ section:nth-child(even):not(.hero) {
     
     .contact-form-wrapper {
         padding: 2rem;
+    }
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .logo img {
+        height: 60px; /* Medium size for tablets */
     }
 }

@@ -58,8 +58,8 @@
         adminBtn.title = 'Admin Login';
         adminBtn.style.cssText = `
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 25px;
+            right: 160px;
             width: 40px;
             height: 40px;
             padding: 0;
@@ -331,10 +331,10 @@
                 adminBtn.style.height = '40px';
                 adminBtn.style.fontSize = '18px';
             } else {
-                // Default desktop position
+                // Default desktop position - aligned with language selector
                 adminBtn.style.display = 'flex';
-                adminBtn.style.top = '20px';
-                adminBtn.style.right = '20px';
+                adminBtn.style.top = '25px';
+                adminBtn.style.right = '160px';
                 adminBtn.style.width = '40px';
                 adminBtn.style.height = '40px';
                 adminBtn.style.fontSize = '18px';
