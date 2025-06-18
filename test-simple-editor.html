@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Simple Editor - Villarromana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="index.html" class="logo">
+                        <img src="img/logo-villarromana.svg" alt="Villarromana Hotel Rural">
+                    </a>
+                    <button class="nav-toggle" aria-label="Abrir menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="pages/instalaciones.html">Instalaciones</a></li>
+                        <li><a href="pages/ubicacion.html">Ubicación</a></li>
+                        <li><a href="pages/entorno.html">Entorno</a></li>
+                        <li><a href="pages/galeria.html">Galería</a></li>
+                        <li><a href="pages/contacto.html">Contacto</a></li>
+                    </ul>
+                    <div class="language-selector">
+                        <button class="lang-button" id="langToggle">
+                            <span>Español</span>
+                            <span>&#9660;</span>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="index.html" class="lang-option active">
+                                <span>Español</span>
+                            </a>
+                            <a href="en/index.html" class="lang-option">
+                                <span>English</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Test Simple Editor</h1>
+                <p>This is a test page for the simple editor functionality.</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2>Sample Content for Testing</h2>
+            <p>This paragraph can be edited by clicking on it when in edit mode.</p>
+            
+            <h3>Another Heading</h3>
+            <p>Here's another paragraph with some <strong>bold text</strong> and <em>italic text</em>.</p>
+            
+            <ul>
+                <li>First list item</li>
+                <li>Second list item</li>
+                <li>Third list item</li>
+            </ul>
+            
+            <h3>Image Test</h3>
+            <p>Below is a test image that can be replaced:</p>
+            <img src="img/fachada1.jpg" alt="Test Image" style="max-width: 100%; height: auto;">
+            
+            <blockquote>
+                <p>This is a quote that can also be edited inline.</p>
+            </blockquote>
+            
+            <h3>Instructions</h3>
+            <ol>
+                <li>Click "Editor Login" button in the header</li>
+                <li>Login with credentials (admin/metadrop2024)</li>
+                <li>Click any text to edit it inline</li>
+                <li>Click any image to replace it</li>
+                <li>Right-click anywhere to add new content</li>
+                <li>Click "Save Changes" to save</li>
+                <li>Click "Exit Editor" to exit</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Hotel Rural Villarromana. Simple Editor Test Page.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/simple-editor.js"></script>
+</body>
+</html>
