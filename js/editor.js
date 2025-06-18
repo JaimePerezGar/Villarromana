@@ -74,8 +74,12 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, top 0.3s ease, right 0.3s ease, width 0.3s ease, height 0.3s ease;
         `;
+        
+        // Set initial position based on screen size
+        document.body.appendChild(adminBtn);
+        adjustAdminButtonPosition();
         adminBtn.onmouseover = () => {
             adminBtn.style.transform = 'scale(1.1)';
             adminBtn.style.background = '#4a904d';
@@ -84,7 +88,6 @@
             adminBtn.style.transform = 'scale(1)';
             adminBtn.style.background = '#2c5530';
         };
-        document.body.appendChild(adminBtn);
 
         // Login panel
         const loginPanel = document.createElement('div');
@@ -307,6 +310,38 @@
                 }
             }
         });
+        
+        // Handle window resize to adjust admin button position
+        window.addEventListener('resize', adjustAdminButtonPosition);
+    }
+    
+    // Adjust admin button position based on screen size
+    function adjustAdminButtonPosition() {
+        const adminBtn = document.getElementById('editor-admin-btn');
+        if (adminBtn) {
+            if (window.innerWidth <= 768) {
+                // On mobile, position below header to avoid menu toggle
+                adminBtn.style.top = '90px';
+                adminBtn.style.right = '20px';
+                adminBtn.style.width = '45px';
+                adminBtn.style.height = '45px';
+                adminBtn.style.fontSize = '20px';
+            } else if (window.innerWidth <= 1024) {
+                // On tablets, slightly adjust position
+                adminBtn.style.top = '25px';
+                adminBtn.style.right = '70px';
+                adminBtn.style.width = '40px';
+                adminBtn.style.height = '40px';
+                adminBtn.style.fontSize = '18px';
+            } else {
+                // Default desktop position
+                adminBtn.style.top = '20px';
+                adminBtn.style.right = '20px';
+                adminBtn.style.width = '40px';
+                adminBtn.style.height = '40px';
+                adminBtn.style.fontSize = '18px';
+            }
+        }
     }
 
     // Generate simple math captcha
