@@ -333,10 +333,11 @@
             const langSelector = document.querySelector('.language-selector');
             if (!langSelector) return;
 
-            // Create login button
+            // Create login button with lock icon
             this.loginButton = document.createElement('button');
-            this.loginButton.className = 'simple-editor-btn';
-            this.loginButton.textContent = 'Editor Login';
+            this.loginButton.className = 'simple-editor-login-btn';
+            this.loginButton.innerHTML = '🔐';
+            this.loginButton.title = 'Admin Login';
             this.loginButton.style.display = state.isLoggedIn ? 'none' : 'block';
             
             // Insert before language selector
