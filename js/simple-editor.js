@@ -57,6 +57,29 @@
             const styles = document.createElement('style');
             styles.textContent = `
                 /* Simple Editor Styles */
+                .simple-editor-login-btn {
+                    width: 40px;
+                    height: 40px;
+                    background: rgba(44, 85, 48, 0.9);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    margin-left: 15px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                }
+                
+                .simple-editor-login-btn:hover {
+                    background: rgba(74, 144, 77, 0.95);
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                }
+
                 .simple-editor-btn {
                     padding: 8px 16px;
                     background: #2c5530;
@@ -93,7 +116,8 @@
                 }
 
                 @media (max-width: 768px) {
-                    .simple-editor-btn {
+                    .simple-editor-btn,
+                    .simple-editor-login-btn {
                         display: none !important;
                     }
                 }
@@ -184,6 +208,38 @@
                     outline-color: #4a904d;
                     background-color: rgba(74, 144, 77, 0.1);
                     cursor: text;
+                }
+                
+                /* Delete buttons */
+                .simple-editor-delete-btn {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    width: 24px;
+                    height: 24px;
+                    background: #dc3545;
+                    color: white;
+                    border: none;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: bold;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                    transition: all 0.2s ease;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                }
+                
+                .simple-editor-delete-btn:hover {
+                    background: #c82333;
+                    transform: scale(1.1);
+                }
+                
+                body.simple-editor-active .simple-editable:hover .simple-editor-delete-btn,
+                body.simple-editor-active .simple-editable-image:hover .simple-editor-delete-btn {
+                    display: flex;
                 }
 
                 body.simple-editor-active .simple-editable:focus {
@@ -466,70 +522,54 @@
         }
 
         addContent(type, position) {
+            const context = this.detectContext(position);
             let element;
             let content = '';
 
             switch(type) {
                 case 'text':
-                    element = document.createElement('p');
-                    content = 'New paragraph - click to edit';
+                    element = this.createSmartTextElement(context);
                     break;
                 case 'image':
-                    this.addImageAtPosition(position);
+                    this.addImageAtPosition(position, context);
                     return;
                 case 'list':
                     element = document.createElement('ul');
                     content = '<li>First item</li><li>Second item</li>';
+                    element.innerHTML = content;
                     break;
             }
 
             if (element) {
-                if (type === 'list') {
-                    element.innerHTML = content;
-                } else {
-                    element.textContent = content;
-                }
-
                 // Insert at position
                 this.insertAtPosition(element, position);
 
-                // Make it editable
-                element.classList.add('simple-editable');
-                element.contentEditable = 'true';
-                element.addEventListener('input', () => this.markChanged());
+                // Make it editable with delete functionality
+                this.makeElementEditable(element);
                 
-                // Focus and select content
-                element.focus();
-                this.selectAllText(element);
+                // Focus and select content for text elements
+                if (type === 'text' && element.contentEditable === 'true') {
+                    element.focus();
+                    this.selectAllText(element);
+                }
                 
                 this.markChanged();
-                this.showNotification('Content added', 'success');
+                this.showNotification(`${this.capitalize(type)} added with ${context.type} formatting`, 'success');
             }
         }
 
-        addImageAtPosition(position) {
+        addImageAtPosition(position, context) {
             this.contextPosition = position;
+            this.currentContext = context;
             this.fileInput.onchange = (e) => {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = (ev) => {
-                        const img = document.createElement('img');
-                        img.src = ev.target.result;
-                        img.style.maxWidth = '100%';
-                        img.style.height = 'auto';
-                        img.classList.add('simple-editable-image');
-                        
-                        // Add click handler for future edits
-                        img.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            this.currentImageTarget = img;
-                            this.fileInput.click();
-                        });
-
-                        this.insertAtPosition(img, position);
+                        const element = this.createSmartImageElement(ev.target.result, context);
+                        this.insertAtPosition(element, position);
                         this.markChanged();
-                        this.showNotification('Image added', 'success');
+                        this.showNotification(`Image added with ${context.type} formatting`, 'success');
                     };
                     reader.readAsDataURL(file);
                 }
@@ -575,6 +615,234 @@
             reader.readAsDataURL(file);
         }
 
+        // Smart context detection
+        detectContext(position) {
+            const target = document.elementFromPoint(position.x, position.y);
+            
+            // Check if we're in a gallery
+            if (target.closest('.gallery-grid, .gallery-section')) {
+                return { type: 'gallery', container: target.closest('.gallery-grid') };
+            }
+            
+            // Check if we're in facilities section
+            if (target.closest('.facilities-grid, .facilities-section')) {
+                return { type: 'facility', container: target.closest('.facilities-grid') };
+            }
+            
+            // Check if we're in a specific section
+            const section = target.closest('section');
+            if (section) {
+                const sectionClass = section.className;
+                if (sectionClass.includes('hero')) {
+                    return { type: 'hero', container: section };
+                }
+            }
+            
+            // Default to regular content
+            return { type: 'content', container: target.closest('main, section, div') || document.querySelector('main') };
+        }
+        
+        // Create smart text elements based on context
+        createSmartTextElement(context) {
+            let element;
+            
+            switch(context.type) {
+                case 'gallery':
+                    element = this.createGalleryItem();
+                    break;
+                case 'facility':
+                    element = this.createFacilityCard();
+                    break;
+                case 'hero':
+                    element = document.createElement('p');
+                    element.className = 'hero-text';
+                    element.textContent = 'New hero text - click to edit';
+                    break;
+                default:
+                    element = document.createElement('p');
+                    element.textContent = 'New paragraph - click to edit';
+            }
+            
+            return element;
+        }
+        
+        // Create smart image elements based on context
+        createSmartImageElement(src, context) {
+            switch(context.type) {
+                case 'gallery':
+                    return this.createGalleryImageItem(src);
+                case 'facility':
+                    return this.createFacilityImageCard(src);
+                default:
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                    this.makeImageEditable(img);
+                    return img;
+            }
+        }
+        
+        // Create gallery item template
+        createGalleryItem() {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('data-category', 'general');
+            item.innerHTML = `
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5DbGljayB0byBhZGQgaW1hZ2U8L3RleHQ+PC9zdmc+" alt="New gallery image">
+                <div class="gallery-overlay">
+                    <h3>New Gallery Item</h3>
+                    <p>Click to edit description</p>
+                </div>
+            `;
+            return item;
+        }
+        
+        // Create gallery item with image
+        createGalleryImageItem(src) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('data-category', 'general');
+            item.innerHTML = `
+                <img src="${src}" alt="New gallery image">
+                <div class="gallery-overlay">
+                    <h3>New Gallery Item</h3>
+                    <p>Click to edit description</p>
+                </div>
+            `;
+            
+            // Make the image editable
+            const img = item.querySelector('img');
+            this.makeImageEditable(img);
+            
+            return item;
+        }
+        
+        // Create facility card template
+        createFacilityCard() {
+            const card = document.createElement('article');
+            card.className = 'facility-card';
+            card.innerHTML = `
+                <div class="facility-image">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5DbGljayB0byBhZGQgaW1hZ2U8L3RleHQ+PC9zdmc+" alt="New facility">
+                </div>
+                <div class="facility-content">
+                    <h3>New Facility</h3>
+                    <p>Click to edit facility description</p>
+                    <ul class="facility-features">
+                        <li>Feature 1</li>
+                        <li>Feature 2</li>
+                    </ul>
+                </div>
+            `;
+            return card;
+        }
+        
+        // Create facility card with image
+        createFacilityImageCard(src) {
+            const card = document.createElement('article');
+            card.className = 'facility-card';
+            card.innerHTML = `
+                <div class="facility-image">
+                    <img src="${src}" alt="New facility">
+                </div>
+                <div class="facility-content">
+                    <h3>New Facility</h3>
+                    <p>Click to edit facility description</p>
+                    <ul class="facility-features">
+                        <li>Feature 1</li>
+                        <li>Feature 2</li>
+                    </ul>
+                </div>
+            `;
+            
+            // Make the image editable
+            const img = card.querySelector('img');
+            this.makeImageEditable(img);
+            
+            return card;
+        }
+        
+        // Make individual elements editable
+        makeElementEditable(element) {
+            element.classList.add('simple-editable');
+            element.style.position = 'relative';
+            
+            // Create delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'simple-editor-delete-btn';
+            deleteBtn.innerHTML = '×';
+            deleteBtn.title = 'Delete element';
+            deleteBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.deleteElement(element);
+            });
+            element.appendChild(deleteBtn);
+            
+            // Make text content editable for simple elements
+            if (element.matches('p, h1, h2, h3, h4, h5, h6, li, blockquote, figcaption')) {
+                element.contentEditable = 'true';
+            } else {
+                // For complex elements, make individual text elements editable
+                const textElements = element.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li');
+                textElements.forEach(textEl => {
+                    textEl.contentEditable = 'true';
+                    textEl.addEventListener('input', () => this.markChanged());
+                });
+            }
+            
+            // Make images within the element editable
+            const images = element.querySelectorAll('img');
+            images.forEach(img => this.makeImageEditable(img));
+            
+            element.addEventListener('input', () => this.markChanged());
+        }
+        
+        // Make images editable
+        makeImageEditable(img) {
+            img.classList.add('simple-editable-image');
+            img.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.currentImageTarget = img;
+                this.fileInput.click();
+            });
+        }
+        
+        // Delete element with confirmation
+        deleteElement(element) {
+            const elementType = this.getElementType(element);
+            
+            if (confirm(`Are you sure you want to delete this ${elementType}?`)) {
+                // Add fade out animation
+                element.style.transition = 'opacity 0.3s ease';
+                element.style.opacity = '0';
+                
+                setTimeout(() => {
+                    element.remove();
+                    this.markChanged();
+                    this.showNotification(`${this.capitalize(elementType)} deleted`, 'success');
+                }, 300);
+            }
+        }
+        
+        // Get element type for user feedback
+        getElementType(element) {
+            if (element.matches('img')) return 'image';
+            if (element.matches('.gallery-item')) return 'gallery item';
+            if (element.matches('.facility-card')) return 'facility card';
+            if (element.matches('h1, h2, h3, h4, h5, h6')) return 'heading';
+            if (element.matches('p')) return 'paragraph';
+            if (element.matches('ul, ol')) return 'list';
+            if (element.matches('li')) return 'list item';
+            return 'element';
+        }
+        
+        // Utility function to capitalize words
+        capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        
         selectAllText(element) {
             const range = document.createRange();
             range.selectNodeContents(element);
