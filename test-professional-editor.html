@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Professional Editor - Villarromana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+        .header {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #2c5530;
+            text-decoration: none;
+        }
+        .language-selector {
+            margin-left: auto;
+        }
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        h1 {
+            color: #2c5530;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #4a904d;
+            font-family: 'Playfair Display', serif;
+            margin-top: 30px;
+        }
+        p {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        ul {
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background: #f0f8f0;
+            border: 1px solid #4a904d;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .footer {
+            background: #2c5530;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-wrapper">
+                <a href="#" class="logo">Villarromana Test Editor</a>
+                <div class="language-selector">
+                    <!-- Login button will be inserted here by the editor -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Test Page for Professional Editor</h1>
+        
+        <div class="info-box">
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li>Click the "Editor Login" button in the header (desktop only)</li>
+                <li>Login with username: <code>admin</code> and password: <code>metadrop2024</code></li>
+                <li>Click "Edit Mode" to start editing</li>
+                <li>Hover over elements to see the + and × buttons</li>
+                <li>Click + to add new elements after any content</li>
+                <li>Click × to delete elements</li>
+                <li>Click on text to edit it</li>
+                <li>Select text to see formatting options</li>
+                <li>Save your changes with the Save button in the toolbar</li>
+            </ul>
+        </div>
+
+        <h2>Sample Content Section</h2>
+        <p>This is a paragraph of text that you can edit. Try clicking on it when in edit mode to modify the content. You can also add new paragraphs, headings, lists, and images.</p>
+        
+        <p>Here's another paragraph. Notice how each element gets its own controls when you hover over it in edit mode. The interface is clean and professional, with no clutter when not editing.</p>
+
+        <h2>Features List</h2>
+        <ul>
+            <li>Clean, integrated login button in header</li>
+            <li>Professional toolbar at the top</li>
+            <li>Visual insertion indicators</li>
+            <li>Working add/delete functionality</li>
+            <li>Text formatting options</li>
+            <li>Image upload support</li>
+            <li>Drag and drop reordering</li>
+            <li>Direct HTML saving</li>
+        </ul>
+
+        <h2>Test Area</h2>
+        <p>Feel free to experiment with the editor here. Add new content, delete existing elements, or modify text. All changes can be saved directly to the HTML file.</p>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Villarromana - Professional Editor Test Page</p>
+    </footer>
+
+    <!-- Include the professional editor -->
+    <script src="js/professional-editor.js"></script>
+</body>
+</html>
