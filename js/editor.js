@@ -22,6 +22,7 @@
     let originalContent = {};
     let currentPageUrl = '';
     let imageUploadQueue = [];
+    let captchaAnswer = 0;
 
     // Initialize
     function init() {
@@ -50,28 +51,39 @@
         // Check if UI already exists
         if (document.getElementById('editor-admin-btn')) return;
 
-        // Admin button
+        // Admin button - small lock icon only
         const adminBtn = document.createElement('button');
         adminBtn.id = 'editor-admin-btn';
-        adminBtn.innerHTML = '🔐 Admin';
+        adminBtn.innerHTML = '🔐';
+        adminBtn.title = 'Admin Login';
         adminBtn.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 10px 20px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
             background: #2c5530;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 50%;
             cursor: pointer;
             z-index: 10000;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         `;
-        adminBtn.onmouseover = () => adminBtn.style.transform = 'scale(1.05)';
-        adminBtn.onmouseout = () => adminBtn.style.transform = 'scale(1)';
+        adminBtn.onmouseover = () => {
+            adminBtn.style.transform = 'scale(1.1)';
+            adminBtn.style.background = '#4a904d';
+        };
+        adminBtn.onmouseout = () => {
+            adminBtn.style.transform = 'scale(1)';
+            adminBtn.style.background = '#2c5530';
+        };
         document.body.appendChild(adminBtn);
 
         // Login panel
@@ -97,6 +109,17 @@
                            style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 16px;">
                     <input type="password" id="editor-password" placeholder="Password" required 
                            style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 16px;">
+                    
+                    <!-- Simple Math Captcha -->
+                    <div style="margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 5px; border: 1px solid #e9ecef;">
+                        <label style="display: block; margin-bottom: 8px; color: #495057; font-size: 14px;">Security Check:</label>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span id="editor-captcha-question" style="font-size: 16px; font-weight: bold; color: #2c5530;"></span>
+                            <input type="number" id="editor-captcha-answer" placeholder="?" required 
+                                   style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; text-align: center;">
+                        </div>
+                    </div>
+                    
                     <div style="display: flex; gap: 10px; margin-top: 20px;">
                         <button type="submit" style="flex: 1; padding: 12px; background: #2c5530; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background 0.3s;">Login</button>
                         <button type="button" id="editor-cancel-login" style="flex: 1; padding: 12px; background: #ccc; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background 0.3s;">Cancel</button>
@@ -243,6 +266,8 @@
                     enableEditMode();
                 }
             } else {
+                // Generate new captcha when showing login
+                generateCaptcha();
                 document.getElementById('editor-login-panel').style.display = 'flex';
                 document.getElementById('editor-username').focus();
             }
@@ -256,6 +281,7 @@
             document.getElementById('editor-login-panel').style.display = 'none';
             document.getElementById('editor-login-form').reset();
             document.getElementById('editor-error').style.display = 'none';
+            captchaAnswer = 0; // Reset captcha
         });
 
         // Toolbar buttons
@@ -269,6 +295,7 @@
                 e.currentTarget.style.display = 'none';
                 document.getElementById('editor-login-form').reset();
                 document.getElementById('editor-error').style.display = 'none';
+                captchaAnswer = 0; // Reset captcha
             }
         });
 
@@ -282,13 +309,45 @@
         });
     }
 
+    // Generate simple math captcha
+    function generateCaptcha() {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        captchaAnswer = num1 + num2;
+        
+        const captchaQuestion = document.getElementById('editor-captcha-question');
+        if (captchaQuestion) {
+            captchaQuestion.textContent = `${num1} + ${num2} = `;
+        }
+        
+        // Clear previous answer
+        const captchaInput = document.getElementById('editor-captcha-answer');
+        if (captchaInput) {
+            captchaInput.value = '';
+        }
+    }
+
     // Handle login
     async function handleLogin(e) {
         e.preventDefault();
         
         const username = document.getElementById('editor-username').value;
         const password = document.getElementById('editor-password').value;
+        const userCaptchaAnswer = parseInt(document.getElementById('editor-captcha-answer').value);
         const errorDiv = document.getElementById('editor-error');
+        
+        // Validate captcha first
+        if (userCaptchaAnswer !== captchaAnswer) {
+            errorDiv.textContent = 'Incorrect security answer. Please try again.';
+            errorDiv.style.display = 'block';
+            generateCaptcha(); // Generate new captcha
+            document.getElementById('editor-captcha-answer').value = '';
+            document.getElementById('editor-captcha-answer').focus();
+            // Shake effect
+            errorDiv.style.animation = 'shake 0.5s';
+            setTimeout(() => errorDiv.style.animation = '', 500);
+            return;
+        }
         
         // Validate credentials
         if (username === CONFIG.username && password === CONFIG.password) {
@@ -301,6 +360,7 @@
         } else {
             errorDiv.textContent = 'Invalid credentials';
             errorDiv.style.display = 'block';
+            generateCaptcha(); // Generate new captcha on failed login
             // Shake effect
             errorDiv.style.animation = 'shake 0.5s';
             setTimeout(() => errorDiv.style.animation = '', 500);
